@@ -205,7 +205,7 @@ let attemptedWord;
 
 //!use inner value variables
 function attemptConcat(a, b, c, d, e, f) {
-    
+
     attemptedWord = a.concat(b, c, d, e, f);
     console.log(attemptedWord)
 }
@@ -226,6 +226,21 @@ function correctLetterWrongPos(a) {
 function letterNotPresent(a) {
     a.style.backgroundcolor = "gray";
     a.style.color = "white";
+}
+
+function allRight(a, b, c, d, e, f) {
+    a.style.backgroundcolor = "mediumseagreen";
+    a.style.color = "white";
+    b.style.backgroundcolor = "mediumseagreen";
+    b.style.color = "white";
+    c.style.backgroundcolor = "mediumseagreen";
+    c.style.color = "white";
+    d.style.backgroundcolor = "mediumseagreen";
+    d.style.color = "white";
+    e.style.backgroundcolor = "mediumseagreen";
+    e.style.color = "white";
+    f.style.backgroundcolor = "mediumseagreen";
+    f.style.color = "white";
 }
 //#endregion
 
@@ -250,8 +265,8 @@ function disableInputs(a, b, c, d, e, f) {
 }
 //#endregion
 
-let tempGrid1;
-let tempValue1;
+let tempGrid1, tempGrid2, tempGrid3, tempGrid4, tempGrid5, tempGrid6;
+let tempValue1, tempValue2, tempValue3, tempValue4, tempValue5, tempValue6;
 
 //?row changer
 function rowChanger(verificationStage) {
@@ -309,7 +324,7 @@ function rowChanger(verificationStage) {
             tempGrid4 = D4Grid;
             tempGrid5 = D5Grid;
             tempGrid6 = D6Grid;
-            
+
             tempValue1 = D1Value;
             tempValue2 = D2Value;
             tempValue3 = D3Value;
@@ -360,7 +375,7 @@ function ideka() {
     for (let i = 0; i < 6; i++) {
         let styleChange = i;
 
-        
+
 
         if (attemptedWord.substr(i, 1) === pickedWord[i]) {
 
@@ -450,11 +465,75 @@ function ideka() {
 function verifyAnswer() {
 
     if (tempValue1.length == 1 && tempValue2.length == 1 && tempValue3.length == 1 && tempValue4.length == 1 && tempValue5.length == 1 && tempValue6.length == 1) {
-        
+
         rowChanger(verificationStage);
         attemptConcat(tempValue1, tempValue2, tempValue3, tempValue4, tempValue5, tempValue6);
 
-        
+        if (attemptConcat == pickedWord) {
+            allRight(tempGrid1, tempGrid2, tempGrid3, tempGrid4, tempGrid5, tempGrid6);
+            switch (verificationStage) {
+                case 0:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the first word! Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+                    break;
+                case 1:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the second try! You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+
+                    break;
+                case 2:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the third try! You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+                    break;
+                case 3:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the fourth try! You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+                    break;
+                case 4:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the fith try! You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+                    break;
+                case 5:
+                    document.getElementById('result').innerHTML = "Congrats! You won on the last try! You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                    document.getElementById('buttonDiv').style.display = "none";
+                    break;
+            }
+        }
+        else {
+            ideka();
+            if (verificationStage < 5) {
+                document.getElementById('result').innerHTML = "Keep trying!";
+                switch (verificationStage) {
+                    case 0:
+                        disableInputs(gridInpA1, gridInpA2, gridInpA3, gridInpA4, gridInpA5, gridInpA6);
+                        enableInputs(gridInpB1, gridInpB2, gridInpB3, gridInpB4, gridInpB5, gridInpB6);
+                        break;
+                    case 1:
+                        disableInputs(gridInpB1, gridInpB2, gridInpB3, gridInpB4, gridInpB5, gridInpB6);
+                        enableInputs(gridInpC1, gridInpC2, gridInpC3, gridInpC4, gridInpC5, gridInpC6);
+                        break;
+                    case 2:
+                        disableInputs(gridInpC1, gridInpC2, gridInpC3, gridInpC4, gridInpC5, gridInpC6);
+                        enableInputs(gridInpD1, gridInpD2, gridInpD3, gridInpD4, gridInpD5, gridInpD6);
+                        break;
+                    case 3:
+                        disableInputs(gridInpD1, gridInpD2, gridInpD3, gridInpD4, gridInpD5, gridInpD6);
+                        enableInputs(gridInpE1, gridInpE2, gridInpE3, gridInpE4, gridInpE5, gridInpE6);
+                        break;
+                    case 4:
+                        disableInputs(gridInpE1, gridInpE2, gridInpE3, gridInpE4, gridInpE5, gridInpE6);
+                        enableInputs(gridInpF1, gridInpF2, gridInpF3, gridInpF4, gridInpF5, gridInpF6);
+                        break;
+
+                }
+                verificationStage++;
+            }
+            else {
+                document.getElementById('result').innerHTML = "You lost! The correct word was: " + pickedWord + " You missed the position of letters " + missCounter + " times, and got the wrong letters " + wrongLetter + " times. Refresh to play again!";
+                document.getElementById('buttonDiv').style.display = "none";
+                disableInputs(gridInpF1, gridInpF2, gridInpF3, gridInpF4, gridInpF5, gridInpF6);
+            }
+        }
 
     }
 }
@@ -539,7 +618,7 @@ function reset() {
     F6Grid.style.backgroundColor = "white";
     F6Grid.style.color = "black";
 
-    enableInputs (gridInpA1, gridInpA2, gridInpA3, gridInpA4, gridInpA5, gridInpA6);
+    enableInputs(gridInpA1, gridInpA2, gridInpA3, gridInpA4, gridInpA5, gridInpA6);
     disableInputs(gridInpB1, gridInpB2, gridInpB3, gridInpB4, gridInpB5, gridInpB6);
     disableInputs(gridInpC1, gridInpC2, gridInpC3, gridInpC4, gridInpC5, gridInpC6);
     disableInputs(gridInpD1, gridInpD2, gridInpD3, gridInpD4, gridInpD5, gridInpD6);
@@ -550,5 +629,8 @@ function reset() {
     console.log(pickedWord)
 }
 
-rowChanger(verificationStage);
+function verifyStack() {
 
+    verifyAnswer();
+
+}
