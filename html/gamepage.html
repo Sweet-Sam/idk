@@ -8,6 +8,14 @@
         <title>WACK</title>
         <link rel=STYLESHEET type="text/css" href="../css/gamepage.css">
         <link rel="icon" href="../IMG/logo.png">
+        <link rel="manifest" href="./seochecker-manifest-9519.json">
+        <script>
+                if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('./sw.js')
+                                .then(function () { console.log('service worker registered'); })
+                                .catch(function () { console.log('service worker failed'); });
+                }
+        </script>
 </head>
 
 <body class="Main">
@@ -107,14 +115,23 @@
                                         id="gridInpF6" maxlength="1" onkeyup="validate(this);" disabled></div>
                 </div>
 
-                <div id="buttonDiv">
-                        <button id="confButton" onclick="verifyStack()">Send!</button>
+                <div class="buttonHolder">
+                        <div id="buttonDivRestart">
+                                <button id="resetButton" onclick="reset()">Reset!</button>
+                        </div>
+                        <div id="buttonDiv">
+                                <button id="confButton" onclick="verifyStack()">Send!</button>
+                        </div>
+                        
                 </div>
+
 
                 <div id="result">
                         Welcome to Not-Wordle! 🟩 means you got the right letter in the right place, 🟥 means you got
                         the right letter in the wrong place and ⬜ means that that letter isn't in the word! good luck!
                 </div>
+
+
 
         </div>
 

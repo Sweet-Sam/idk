@@ -336,6 +336,10 @@ h1 {
     text-align: center;
 }
 
+#buttonDivRestart {
+    text-align: center;
+}
+
 button {
     font-size: x-large;
     font-weight: 600;
@@ -343,7 +347,7 @@ button {
     background-color: #333;
     border-radius: 4px;
 
-    margin-top: 3vh;
+    margin-top: 1vh;
     padding-right: 5vh;
     padding-left: 5vh;
     padding-top: 2vh;
@@ -351,8 +355,15 @@ button {
 }
 
 #result {
-    margin-top: 1vh;
+    margin-top: 0.5vh;
     text-align: center;
     font-size: large;
     font-weight: 500;
+}
+
+.buttonHolder {
+    display: flex;
+    flex-direction: row;
+    gap: 4vw;
+    justify-content: center;
 }
